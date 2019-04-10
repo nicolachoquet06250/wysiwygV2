@@ -38,3 +38,55 @@ textarea {
     border-color: transparent;
     color: white;
 }
+
+
+/* v2 */
+
+wysiwyg .commands input[type="button"], wysiwyg .commands select {
+    background: transparent;
+    border: 1px solid black;
+    padding: 5px 15px;
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+wysiwyg .commands input[type="button"]:hover {
+    background: gray;
+    border-color: transparent;
+    color: white;
+}
+
+wysiwyg .editor {
+    resize: both;
+}
+
+wysiwyg .editor h1, wysiwyg .editor h2, wysiwyg .editor h3 {
+    color: gray;
+}
+
+wysiwyg .editor img {
+    min-width: 200px;
+    min-height: 200px;
+}
+
+wysiwyg .editor, wysiwyg textarea {
+    width: 500px;
+    height: 200px;
+    border: 1px solid black;
+    padding: 5px;
+    overflow: auto;
+}
+
+wysiwyg textarea {
+    resize: none;
+}
+
+wysiwyg .editor .smile {
+    min-width: 20px;
+    min-height: 20px;
+    max-width: 20px;
+    max-height: 20px;
+    resize: none;
+}
