@@ -27,6 +27,22 @@ function resultat(elem, editor) {
     elem.value = editor.innerHTML;
 }
 
+function set_cursor(editor) {
+    editor.focus();
+    if(editor.childNodes.length >= 1) {
+        let id = editor.childNodes.length - 1;
+        let lastLine = editor.childNodes[id];
+        if(lastLine.nodeName === 'BR') {
+            lastLine = editor.childNodes[id - 1];
+        }
+        let lastLineType = lastLine.nodeName;
+        let lastChar = (lastLineType === '#text' ? lastLine.textContent.length : lastLine.innerText.replace("\n", '').length);
+        const selection = window.getSelection();
+        selection.collapse(lastLine, lastChar -1);
+        editor.click();
+    }
+}
+
 window.addEventListener('load', () => {
     let editors = document.querySelectorAll('wysiwyg');
     editors.forEach(editor => {
@@ -203,10 +219,11 @@ window.addEventListener('load', () => {
             });
             wys.addEventListener('keyup', evt => {
                 let content = wys.innerHTML;
-                if(content.indexOf(' :D ') !== -1) {
-                    // console.log(content_text.substr(content_text.length-4, 3));
+                if(content.indexOf(' :D ') !== -1 || content.indexOf(' :) ') !== -1) {
                     content = content.replace(' :D', ' <img src="./images/smiles/smile.png" class="smile" alt=":D" /> ');
+                    content = content.replace(' :)', ' <img src="./images/smiles/smile.png" class="smile" alt=":)" /> ');
                     wys.innerHTML = content;
+                    set_cursor(wys);
                 }
             });
         });
@@ -222,6 +239,7 @@ window.addEventListener('load', () => {
             editor.append(result_button_container);
 
             let result = document.createElement('textarea');
+            result.setAttribute('disabled', 'disabled');
             result.classList.add('html_result');
 
             result_button.addEventListener('click', () => {
