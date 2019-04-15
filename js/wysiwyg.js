@@ -46,6 +46,16 @@ function set_cursor(editor) {
 window.addEventListener('load', () => {
     let editors = document.querySelectorAll('wysiwyg');
     editors.forEach(editor => {
+        let debug = editor.hasAttribute('debug');
+
+        let resizable = editor.hasAttribute('resizable');
+        let resizable_x = editor.hasAttribute('resizable-x');
+        let resizable_y = editor.hasAttribute('resizable-y');
+
+        let content = editor.innerHTML;
+        let placeholder = editor.hasAttribute('placeholder') ? editor.getAttribute('placeholder') : null;
+        let classes = editor.classList;
+
         let commands = document.createElement('div');
         commands.classList.add('commands');
 
@@ -53,9 +63,7 @@ window.addEventListener('load', () => {
         b.setAttribute('type', 'button');
         b.value = 'G';
         b.style.fontWeight = 'bold';
-        b.addEventListener('click', () => {
-            commande('bold');
-        });
+        b.addEventListener('click', bold);
 
         commands.append(b);
 
@@ -63,9 +71,7 @@ window.addEventListener('load', () => {
         i.setAttribute('type', 'button');
         i.value = 'I';
         i.style.fontStyle = 'italic';
-        i.addEventListener('click', () => {
-            commande('italic');
-        });
+        i.addEventListener('click', italic);
 
         commands.append(i);
 
@@ -73,17 +79,12 @@ window.addEventListener('load', () => {
         u.setAttribute('type', 'button');
         u.value = 'U';
         u.style.textDecoration = 'underline';
-        u.addEventListener('click', () => {
-            commande('underline');
-        });
+        u.addEventListener('click', underline);
 
         commands.append(u);
 
         let alignements = document.createElement('select');
-        alignements.addEventListener('change', () => {
-            commande(alignements.value);
-            alignements.selectedIndex = 0;
-        });
+        alignements.addEventListener('change', () => changeAlign(alignements));
         let first_option_align = document.createElement('option');
         first_option_align.value = '';
         first_option_align.innerHTML = 'Allignements';
@@ -114,35 +115,26 @@ window.addEventListener('load', () => {
         let links = document.createElement('input');
         links.setAttribute('type', 'button');
         links.value = 'Liens';
-        links.addEventListener('click', () => {
-            commande('createLink');
-        });
+        links.addEventListener('click', createLink);
 
         commands.append(links);
 
         let images = document.createElement('input');
         images.setAttribute('type', 'button');
         images.value = 'Image';
-        images.addEventListener('click', () => {
-            commande('insertImage');
-        });
+        images.addEventListener('click', insertImage);
 
         commands.append(images);
 
         let youtube = document.createElement('input');
         youtube.setAttribute('type', 'button');
         youtube.value = 'Vidéo Youtube';
-        youtube.addEventListener('click', () => {
-            insert_youtube_video();
-        });
+        youtube.addEventListener('click', insertYoutubeVideo);
 
         commands.append(youtube);
 
         let titles = document.createElement('select');
-        titles.addEventListener('change', () => {
-            commande('heading', titles.value);
-            titles.selectedIndex = 0;
-        });
+        titles.addEventListener('change', () => changeHeading(titles));
         let first_option_titles = document.createElement('option');
         first_option_titles.value = '';
         first_option_titles.innerHTML = 'Titres';
@@ -186,50 +178,31 @@ window.addEventListener('load', () => {
         wys.classList.add('editor');
         wys.setAttribute('contentEditable', 'true');
 
+        if(resizable) {
+            wys.classList.add('resizable');
+        } else if(resizable_x) {
+            wys.classList.add('resizable-x');
+        } else if(resizable_y) {
+            wys.classList.add('resizable-y');
+        }
+
+        if(placeholder) {
+            wys.innerHTML = '<span class="placeholder">' + placeholder + '</span>';
+        }
+        if(content) {
+            wys.innerHTML = content;
+        }
+        if(classes.length >= 1) {
+            classes.forEach(classe => wys.classList.add(classe));
+        }
+
         editor.append(wys);
 
-        wys.addEventListener('focus', () => {
-            wys.addEventListener('keydown', evt => {
-                if(evt.ctrlKey && (evt.key === 'l' || evt.key === 'L')) {
-                    evt.preventDefault();
-                    commande('justifyLeft');
-                }
-                else if(evt.ctrlKey && (evt.key === 'r' || evt.key === 'R')) {
-                    evt.preventDefault();
-                    commande('justifyRight');
-                }
-                else if(evt.ctrlKey && (evt.key === 'j' || evt.key === 'J')) {
-                    commande('justifyFull');
-                }
-                else if(evt.ctrlKey && (evt.key === 'c' || evt.key === 'C')) {
-                    commande('justifyCenter');
-                }
-                else if(evt.ctrlKey && (evt.key === 'b' || evt.key === 'B')) {
-                    evt.preventDefault();
-                    commande('bold');
-                }
-                else if(evt.ctrlKey && (evt.key === 'i' || evt.key === 'I')) {
-                    evt.preventDefault();
-                    commande('italic');
-                }
-                else if(evt.ctrlKey && (evt.key === 'u' || evt.key === 'U')) {
-                    evt.preventDefault();
-                    commande('underline');
-                }
-            });
-            wys.addEventListener('keyup', evt => {
-                let content = wys.innerHTML;
-                if(content.indexOf(' :D ') !== -1 || content.indexOf(' :) ') !== -1) {
-                    content = content.replace(' :D', ' <img src="./images/smiles/smile.png" class="smile" alt=":D" /> ');
-                    content = content.replace(' :)', ' <img src="./images/smiles/smile.png" class="smile" alt=":)" /> ');
-                    wys.innerHTML = content;
-                    set_cursor(wys);
-                }
-            });
-        });
+        wys.addEventListener('focus', () => focusWys(wys));
+        wys.addEventListener('blur', () => focusOutWys(wys));
 
         // debug
-        if(editor.hasAttribute('debug')) {
+        if(debug) {
             let result_button_container = document.createElement('div');
             let result_button = document.createElement('input');
             result_button.value = 'Obtenir le HTML';
@@ -242,9 +215,7 @@ window.addEventListener('load', () => {
             result.setAttribute('disabled', 'disabled');
             result.classList.add('html_result');
 
-            result_button.addEventListener('click', () => {
-                resultat(result, wys);
-            });
+            result_button.addEventListener('click', () => resultat(result, wys));
 
             editor.append(result);
         }

@@ -59,7 +59,7 @@ wysiwyg .commands input[type="button"]:hover {
 }
 
 wysiwyg .editor {
-    resize: both;
+    resize: none;
 }
 
 wysiwyg .editor h1, wysiwyg .editor h2, wysiwyg .editor h3 {
@@ -89,4 +89,20 @@ wysiwyg .editor .smile {
     max-width: 20px;
     max-height: 20px;
     resize: none;
+}
+
+wysiwyg .editor.resizable {
+    resize: both;
+}
+
+wysiwyg .editor.resizable-x {
+    resize: horizontal;
+}
+
+wysiwyg .editor.resizable-y {
+    resize: vertical;
+}
+
+wysiwyg .editor .placeholder {
+    color: darkgrey;
 }
