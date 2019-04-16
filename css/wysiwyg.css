@@ -1,44 +1,11 @@
-#editeur, textarea {
+textarea {
     width: 500px;
     height: 200px;
     border: 1px solid black;
     padding: 5px;
     overflow: auto;
-}
-
-textarea {
     resize: none;
 }
-
-#editeur {
-    resize: both;
-}
-
-#editeur h1, #editeur h2, #editeur h3 {
-    color: gray;
-}
-
-#editeur img {
-    min-width: 200px;
-    min-height: 200px;
-}
-
-#commands input[type="button"], #commands select {
-    background: transparent;
-    border: 1px solid black;
-    padding: 5px 15px;
-    cursor: pointer;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-}
-
-#commands input[type="button"]:hover {
-    background: gray;
-    border-color: transparent;
-    color: white;
-}
-
 
 /* v2 */
 
@@ -52,7 +19,7 @@ wysiwyg .commands input[type="button"], wysiwyg .commands select {
     appearance: none;
 }
 
-wysiwyg .commands input[type="button"]:hover {
+wysiwyg .commands input[type="button"]:hover, wysiwyg .commands select:hover {
     background: gray;
     border-color: transparent;
     color: white;
