@@ -1,5 +1,5 @@
 function insert_youtube_video() {
-    let url = prompt("Quelle est l'adresse de la video ?");
+    let url = prompt('Quelle est l\'adresse de la video ?');
     if (url !== '') {
         let html = `<iframe width="560" height="315" src="${url}" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" style="width: 80%;" allowfullscreen></iframe><br><br>`;
         commande('insertHTML', html);
@@ -11,11 +11,11 @@ function commande(nom, argument) {
         argument = '';
     }
     switch (nom) {
-        case "createLink":
-            argument = prompt("Quelle est l'adresse du lien ?");
+        case 'createLink':
+            argument = prompt('Quelle est l\'adresse du lien ?');
             break;
-        case "insertImage":
-            argument = prompt("Quelle est l'adresse de l'image ?");
+        case 'insertImage':
+            argument = prompt('Quelle est l\'adresse de l\'image ?');
             break;
     }
     if (!(nom === 'createLink' && argument === '')) {
@@ -53,8 +53,11 @@ window.addEventListener('load', () => {
         let resizable_y = editor.hasAttribute('resizable-y');
 
         let content = editor.innerHTML;
+        editor.innerHTML = '';
         let placeholder = editor.hasAttribute('placeholder') ? editor.getAttribute('placeholder') : null;
         let classes = editor.classList;
+
+        let spellcheck = editor.hasAttribute('spellcheck') ? editor.getAttribute('spellcheck') : 'false';
 
         let commands = document.createElement('div');
         commands.classList.add('commands');
@@ -187,7 +190,7 @@ window.addEventListener('load', () => {
         }
 
         if(placeholder) {
-            wys.innerHTML = '<span class="placeholder">' + placeholder + '</span>';
+            wys.innerHTML = `<span class="placeholder" spellcheck="false">${placeholder}</span>`;
         }
         if(content) {
             wys.innerHTML = content;
@@ -197,6 +200,8 @@ window.addEventListener('load', () => {
         }
 
         editor.append(wys);
+
+        editor.setAttribute('spellcheck', spellcheck);
 
         wys.addEventListener('focus', () => focusWys(wys));
         wys.addEventListener('blur', () => focusOutWys(wys));

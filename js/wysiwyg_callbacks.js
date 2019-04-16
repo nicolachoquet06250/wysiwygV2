@@ -84,7 +84,11 @@ function focusWys(wys) {
 
 function focusOutWys(wys) {
     let placeholder = wys.parentElement.getAttribute('placeholder');
-    if(wys.querySelector('placeholder') !== null || wys.childNodes.length === 0 || (wys.childNodes.length === 1 && wys.childNodes[0].nodeName === 'BR' )) {
+    if(placeholder !== null
+        && (wys.querySelector('placeholder') !== null
+            || wys.childNodes.length === 0
+            || (wys.childNodes.length === 1
+                && wys.childNodes[0].nodeName === 'BR' ))) {
         wys.innerHTML = '<span class="placeholder">' + placeholder + '</span>';
     }
 }
