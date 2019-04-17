@@ -48,9 +48,12 @@ window.addEventListener('load', () => {
     editors.forEach(editor => {
         let debug = get_attr(editor, 'debug');
 
-        let resizable = get_attr(editor, 'resizable');
-        let resizable_x = get_attr(editor, 'resizable-x');
-        let resizable_y = get_attr(editor, 'resizable-y');
+        let framework_used = has_attr(editor, 'css-framework')
+            ? get_attr(editor, 'css-framework') : 'none';
+
+        let resizable = has_attr(editor, 'resizable');
+        let resizable_x = has_attr(editor, 'resizable-x');
+        let resizable_y = has_attr(editor, 'resizable-y');
 
         let content = editor.innerHTML;
         editor.innerHTML = '';
@@ -62,33 +65,34 @@ window.addEventListener('load', () => {
 
         let commands = document.createElement('div');
         commands.classList.add('commands');
-
-        commands.append(create_command_button('G', {
-            fontWeight: 'bold'
-        }, bold));
-        commands.append(create_command_button('I', {
-            fontStyle: 'italic'
-        }, italic));
-        commands.append(create_command_button('U', {
-            textDecoration: 'underline'
-        }, underline));
-        commands.append(create_command_select('Alignements', [
-            create_command_select_option('Gauche', 'justifyLeft'),
-            create_command_select_option('Centré', 'justifyCenter'),
-            create_command_select_option('Justifié', 'justifyFull'),
-            create_command_select_option('Droite', 'justifyRight')
-        ], {}, changeAlign));
-        commands.append(create_command_button('Liens', {}, createLink));
-        commands.append(create_command_button('Image', {}, insertImage));
-        commands.append(create_command_button('Video Youtube', {}, insertYoutubeVideo));
-        commands.append(create_command_select('Titres', [
-            create_command_select_option('Titre 1', 'h1'),
-            create_command_select_option('Titre 2', 'h2'),
-            create_command_select_option('Titre 3', 'h3'),
-            create_command_select_option('Titre 4', 'h4'),
-            create_command_select_option('Titre 5', 'h5'),
-            create_command_select_option('Titre 6', 'h6'),
-        ], {}, changeHeading));
+        [
+            create_command_button('G', {
+                fontWeight: 'bold'
+            }, bold, framework_used),
+            create_command_button('I', {
+                fontStyle: 'italic'
+            }, italic, framework_used),
+            create_command_button('U', {
+                textDecoration: 'underline'
+            }, underline, framework_used),
+            create_command_select('Alignements', [
+                create_command_select_option('Gauche', 'justifyLeft'),
+                create_command_select_option('Centré', 'justifyCenter'),
+                create_command_select_option('Justifié', 'justifyFull'),
+                create_command_select_option('Droite', 'justifyRight')
+            ], {}, changeAlign, framework_used),
+            create_command_button('Liens', {}, createLink, framework_used),
+            create_command_button('Image', {}, insertImage, framework_used),
+            create_command_button('Video Youtube', {}, insertYoutubeVideo, framework_used),
+            create_command_select('Titres', [
+                create_command_select_option('Titre 1', 'h1'),
+                create_command_select_option('Titre 2', 'h2'),
+                create_command_select_option('Titre 3', 'h3'),
+                create_command_select_option('Titre 4', 'h4'),
+                create_command_select_option('Titre 5', 'h5'),
+                create_command_select_option('Titre 6', 'h6'),
+            ], {}, changeHeading, framework_used)
+        ].forEach(elem => commands.append(elem));
 
         editor.append(commands);
         let wys = create_editor(editor,
@@ -99,11 +103,11 @@ window.addEventListener('load', () => {
             {
                 width: commands.offsetWidth - 13 + 'px',
                 minWidth: commands.offsetWidth - 13 + 'px'
-            });
+            }, framework_used);
         editor.append(wys);
         editor.setAttribute('spellcheck', spellcheck);
 
         // debug
-        helper_debug(editor, wys, debug);
+        helper_debug(editor, wys, debug, framework_used);
     });
 });
