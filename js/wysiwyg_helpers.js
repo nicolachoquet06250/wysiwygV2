@@ -35,7 +35,7 @@ function create_command_select_option(label, value) {
     return o;
 }
 
-function create_editor(resizable, resizable_x, resizable_y, placeholder,
+function create_editor(editor, resizable, resizable_x, resizable_y, placeholder,
                        content, classes, onfocus = null, onblur = null, style = {}) {
     let wys = document.createElement('div');
     wys.classList.add('editor');
@@ -65,10 +65,9 @@ function create_editor(resizable, resizable_x, resizable_y, placeholder,
 
     if(onfocus !== null) wys.addEventListener('focus', () => onfocus(wys));
     if(onblur !== null) wys.addEventListener('blur', () => onblur(wys));
+    let commands = editor.querySelector('.commands');
     wys.addEventListener('resize', () => {
         let width = parseInt(this.style.width.replace('px', ''));
-        let editor = wys.parentElement;
-        let commands = editor.querySelector('.commands');
         commands.style.width = (width + 14) + 'px';
     });
 

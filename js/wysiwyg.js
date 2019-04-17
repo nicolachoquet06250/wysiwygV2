@@ -91,7 +91,7 @@ window.addEventListener('load', () => {
         ], {}, changeHeading));
 
         editor.append(commands);
-        let wys = create_editor(
+        let wys = create_editor(editor,
             resizable, resizable_x, resizable_y,
             placeholder, content,
             classes,
