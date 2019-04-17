@@ -65,6 +65,12 @@ function create_editor(resizable, resizable_x, resizable_y, placeholder,
 
     if(onfocus !== null) wys.addEventListener('focus', () => onfocus(wys));
     if(onblur !== null) wys.addEventListener('blur', () => onblur(wys));
+    wys.addEventListener('resize', () => {
+        let width = parseInt(this.style.width.replace('px', ''));
+        let editor = wys.parentElement;
+        let commands = editor.querySelector('.commands');
+        commands.style.width = (width + 14) + 'px';
+    });
 
     return wys;
 }

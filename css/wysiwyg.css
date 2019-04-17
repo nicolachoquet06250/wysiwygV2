@@ -9,24 +9,49 @@ textarea {
 
 /* v2 */
 
+wysiwyg .commands {
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    border-top: 1px solid black;
+}
+
 wysiwyg .commands input[type="button"], wysiwyg .commands select {
     background: transparent;
-    border: 1px solid black;
+    border: none;
     padding: 5px 15px;
     cursor: pointer;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
+    border-bottom: 4px solid transparent;
 }
 
-wysiwyg .commands input[type="button"]:hover, wysiwyg .commands select:hover {
-    background: gray;
-    border-color: transparent;
-    color: white;
+wysiwyg .commands input[type="button"] {
+    padding-bottom: 6px;
+    padding-top: 6px;
+}
+
+wysiwyg .commands input[type="button"]:hover,
+wysiwyg .commands select:hover,
+wysiwyg .commands select::-moz-focus-inner {
+    border-bottom-color: gray;
+}
+
+wysiwyg .editor, wysiwyg textarea {
+    width: 500px;
+    height: 200px;
+    border: 1px solid black;
+    padding: 5px;
+    overflow: auto;
 }
 
 wysiwyg .editor {
+    border-top: none;
     resize: none;
+}
+
+wysiwyg .editor:focus {
+    outline: none;
 }
 
 wysiwyg .editor h1, wysiwyg .editor h2, wysiwyg .editor h3 {
@@ -36,14 +61,6 @@ wysiwyg .editor h1, wysiwyg .editor h2, wysiwyg .editor h3 {
 wysiwyg .editor img {
     min-width: 200px;
     min-height: 200px;
-}
-
-wysiwyg .editor, wysiwyg textarea {
-    width: 500px;
-    height: 200px;
-    border: 1px solid black;
-    padding: 5px;
-    overflow: auto;
 }
 
 wysiwyg textarea {

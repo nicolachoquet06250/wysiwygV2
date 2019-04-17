@@ -72,7 +72,7 @@ window.addEventListener('load', () => {
         commands.append(create_command_button('U', {
             textDecoration: 'underline'
         }, underline));
-        commands.append(create_command_select('Allignements', [
+        commands.append(create_command_select('Alignements', [
             create_command_select_option('Gauche', 'justifyLeft'),
             create_command_select_option('Centré', 'justifyCenter'),
             create_command_select_option('Justifié', 'justifyFull'),
@@ -80,7 +80,7 @@ window.addEventListener('load', () => {
         ], {}, changeAlign));
         commands.append(create_command_button('Liens', {}, createLink));
         commands.append(create_command_button('Image', {}, insertImage));
-        commands.append(create_command_button('Vidéo Youtube', {}, insertYoutubeVideo));
+        commands.append(create_command_button('Video Youtube', {}, insertYoutubeVideo));
         commands.append(create_command_select('Titres', [
             create_command_select_option('Titre 1', 'h1'),
             create_command_select_option('Titre 2', 'h2'),
@@ -97,7 +97,8 @@ window.addEventListener('load', () => {
             classes,
             focusWys, focusOutWys,
             {
-                width: commands.offsetWidth - 14 + 'px'
+                width: commands.offsetWidth - 13 + 'px',
+                minWidth: commands.offsetWidth - 13 + 'px'
             });
         editor.append(wys);
         editor.setAttribute('spellcheck', spellcheck);
