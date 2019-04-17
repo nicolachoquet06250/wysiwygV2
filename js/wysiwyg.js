@@ -95,7 +95,10 @@ window.addEventListener('load', () => {
             resizable, resizable_x, resizable_y,
             placeholder, content,
             classes,
-            focusWys, focusOutWys);
+            focusWys, focusOutWys,
+            {
+                width: commands.offsetWidth - 14 + 'px'
+            });
         editor.append(wys);
         editor.setAttribute('spellcheck', spellcheck);
 

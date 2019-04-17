@@ -35,7 +35,8 @@ function create_command_select_option(label, value) {
     return o;
 }
 
-function create_editor(resizable, resizable_x, resizable_y, placeholder, content, classes, onfocus = null, onblur = null) {
+function create_editor(resizable, resizable_x, resizable_y, placeholder,
+                       content, classes, onfocus = null, onblur = null, style = {}) {
     let wys = document.createElement('div');
     wys.classList.add('editor');
     wys.setAttribute('contentEditable', 'true');
@@ -56,6 +57,10 @@ function create_editor(resizable, resizable_x, resizable_y, placeholder, content
     }
     if(classes.length >= 1) {
         classes.forEach(classe => wys.classList.add(classe));
+    }
+    for(let prop in style) {
+        let value = style[prop];
+        wys.style[prop] = value;
     }
 
     if(onfocus !== null) wys.addEventListener('focus', () => onfocus(wys));
