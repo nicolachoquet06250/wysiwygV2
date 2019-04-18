@@ -1,0 +1,125 @@
+.post {
+    margin: 15px;
+    box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.3);
+    padding: 5px;
+    display: inline-block;
+    text-align: left;
+}
+
+.post .post-toolbar {
+    border-bottom: 1px solid gray;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+}
+
+.post .post-toolbar input[type=button] {
+    background: transparent;
+    border: 1px solid gray;
+    padding-left: 8px;
+    padding-right: 8px;
+    cursor: pointer;
+}
+
+.post .post-toolbar input[type=button]:hover {
+    background: gray;
+    color: white;
+}
+
+.post .content .smile {
+    min-width: 20px;
+    min-height: 20px;
+    max-width: 20px;
+    max-height: 20px;
+    resize: none;
+}
+
+.post .header {
+    font-style: italic;
+    font-size: 12px;
+}
+
+.post .header .profile-pic {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background-size: 40px;
+    background-repeat: no-repeat;
+    border: 1px solid gray;
+    -webkit-border-radius: 40px;
+    -moz-border-radius: 40px;
+    border-radius: 40px;
+}
+
+.post-list .post.me {
+    margin-left: 30px;
+}
+.post-list .post.me .header {
+    position: relative;
+    z-index: 2;
+}
+.post-list .post.me:before {
+    content: "";
+    display: block;
+    position: absolute;
+    margin-top: 40px;
+    width: 20px;
+    height: 20px;
+    left: 25px;
+    transform: rotate(45deg);
+    background-color: white;
+    box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    border-left: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.post-list .post:not(.me) {
+    margin-left: 30px;
+}
+.post-list .post:not(.me) .header {
+    position: relative;
+    z-index: 2;
+}
+.post-list .post:not(.me):before {
+    content: "";
+    display: block;
+    position: absolute;
+    margin-top: 40px;
+    width: 20px;
+    height: 20px;
+    right: 10px;
+    transform: rotate(45deg);
+    background-color: white;
+    box-shadow: 6px 0 0 0 rgba(0, 0, 0, 0.1);
+    border-top: 1px solid rgba(0, 0, 0, 0.3);
+    border-right: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.post-list .right-align {
+    text-align: right;
+}
+.post-list .left-align {
+    text-align: left;
+}
+
+wysiwyg .editor .citation:before {
+    content: "Citation du message de "attr(data-author_name)":";
+    display: block;
+}
+wysiwyg .editor .citation {
+    border: 1px solid gray;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+wysiwyg .editor .citation .close-bar {
+    text-align: right;
+}
+wysiwyg .editor .citation .close-bar .close-btn {
+    position: absolute;
+    margin-left: -15px;
+    margin-top: -25px;
+    text-decoration: none;
+    color: black;
+}

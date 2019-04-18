@@ -1,5 +1,5 @@
 # wysiwygV2
-Wysiwyg créé en HTML and JS et qui exploite les fonctionnalitées d'une div éditable
+Wysiwyg créé en HTML and JS et qui exploite les fonctionalités d'une div éditable
  
  - Liens
     - https://openclassrooms.com/fr/courses/1744696-creez-un-editeur-de-texte-wysiwyg
@@ -26,4 +26,4 @@ Wysiwyg créé en HTML and JS et qui exploite les fonctionnalitées d'une div é
     - debug
     - spellcheck -> "true" ou "false" ou rien mettre
 
- - Et le contenu par défault entre les balises ouvrantes et fermantes.
+ - Et le contenu par default entre les balises ouvrantes et fermantes.

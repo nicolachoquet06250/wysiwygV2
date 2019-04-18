@@ -46,7 +46,7 @@ function set_cursor(editor) {
 window.addEventListener('load', () => {
     let editors = document.querySelectorAll('wysiwyg');
     editors.forEach(editor => {
-        let debug = get_attr(editor, 'debug');
+        let debug = has_attr(editor, 'debug');
 
         let framework_used = has_attr(editor, 'css-framework')
             ? get_attr(editor, 'css-framework') : 'none';
