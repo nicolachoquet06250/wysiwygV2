@@ -8,15 +8,6 @@ function cite_element_into_wysiwyg(elem, destination) {
     editor.innerHTML += '<div contentEditable="false" class="citation" data-author="' + elem.getAttribute('data-author') + '" data-author_name="' + author_name + '"><div class="close-bar"><a href="#" class="close-btn">X</a></div>' + element_content + '</div><br>';
 }
 
-function init_citations_close_btns() {
-    document.querySelectorAll('wysiwyg .editor .citation .close-bar .close-btn').forEach(button => {
-        button.addEventListener('click', e => {
-            e.preventDefault();
-            button.parentElement.parentElement.remove();
-        });
-    });
-}
-
 function init_citation_buttons() {
     document.querySelectorAll('.post .post-toolbar .cite').forEach(button => {
         button.addEventListener('click', () => {
@@ -26,16 +17,18 @@ function init_citation_buttons() {
     });
 }
 
-window.onload = () => {
-    init_citation_buttons();
-
+function init_posts() {
     document.querySelectorAll('.post-list .post').forEach(post => {
         let me = parseInt(document.querySelector('#me').value);
-
         if(parseInt(post.getAttribute('data-author')) === me) {
             post.classList.add('me');
         }
 
         post.parentElement.classList.add((parseInt(post.getAttribute('data-author')) === me ? 'left' : 'right') + '-align')
     });
+}
+
+window.onload = () => {
+    init_citation_buttons();
+    init_posts();
 };

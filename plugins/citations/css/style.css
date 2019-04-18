@@ -1,0 +1,22 @@
+wysiwyg .editor .citation:before {
+    content: "Citation du message de "attr(data-author_name)":";
+    display: block;
+}
+wysiwyg .editor .citation {
+    border: 1px solid gray;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+wysiwyg .editor .citation .close-bar {
+    text-align: right;
+}
+wysiwyg .editor .citation .close-bar .close-btn {
+    position: absolute;
+    margin-left: -15px;
+    margin-top: -25px;
+    text-decoration: none;
+    color: black;
+}
