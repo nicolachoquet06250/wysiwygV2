@@ -1,5 +1,5 @@
 window.onload = () => {
-    function build_fake_posts(posts_min_width = 800, posts_max_width = null) {
+    function build_fake_posts(posts_min_width = null, posts_max_width = null) {
         let posts_list = document.querySelector('.post-list');
         [
             {
@@ -150,7 +150,7 @@ window.onload = () => {
             let post_container = document.createElement('div');
             let _post = document.createElement('div');
             _post.setAttribute('data-author', post.author);
-            _post.style.minWidth = posts_min_width + 'px';
+            if(posts_min_width !== null) _post.style.minWidth = posts_min_width + 'px';
             if(posts_max_width !== null) _post.style.maxWidth = posts_max_width + 'px';
             _post.classList.add('post');
 
@@ -192,5 +192,5 @@ window.onload = () => {
         init_citation_buttons();
     }
 
-    build_fake_posts(540, 1000);
+    build_fake_posts();
 };
