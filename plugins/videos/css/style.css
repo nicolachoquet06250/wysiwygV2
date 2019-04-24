@@ -1,0 +1,15 @@
+wysiwyg .video {
+    margin: 15px;
+    min-width: 200px;
+    min-height: 200px;
+    resize: both;
+    cursor: pointer;
+}
+
+wysiwyg .video .media-video {
+    resize: both;
+}
+
+wysiwyg .video .media-video {
+    width: 100%;
+}

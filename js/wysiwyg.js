@@ -1,6 +1,6 @@
 function insert_youtube_video() {
     let url = prompt('Quelle est l\'adresse de la video ?');
-    if (url !== '') {
+    if (url) {
         let html = `<iframe width="560" height="315" src="${url}" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" style="width: 80%;" allowfullscreen></iframe><br><br>`;
         commande('insertHTML', html);
     }
@@ -18,7 +18,12 @@ function commande(nom, argument) {
             argument = prompt('Quelle est l\'adresse de l\'image ?');
             break;
     }
-    if (!(nom === 'createLink' && argument === '')) {
+    console.log(!(nom === 'insertImage' && (!argument || argument === null)));
+    if(!(nom === 'createLink' && (!argument || argument === null))) {
+        document.execCommand(nom, false, argument);
+    }
+    else if(!(nom === 'insertImage' && (!argument || argument === null))) {
+        console.log(!(nom === 'insertImage' && (!argument || argument === null)));
         document.execCommand(nom, false, argument);
     }
 }
@@ -102,7 +107,8 @@ window.addEventListener('load', () => {
             focusWys, focusOutWys,
             {
                 width: commands.offsetWidth - 13 + 'px',
-                minWidth: commands.offsetWidth - 13 + 'px'
+                minWidth: commands.offsetWidth - 13 + 'px',
+                height: commands.parentElement.offsetHeight + 'px'
             }, framework_used);
         editor.append(wys);
         editor.setAttribute('spellcheck', spellcheck);

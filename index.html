@@ -9,6 +9,7 @@
     <!-- inclusion des plugins css -->
     <link rel="stylesheet" href="plugins/citations/css/style.css" />
     <link rel="stylesheet" href="plugins/posts/css/style.css" />
+    <link rel="stylesheet" href="plugins/videos/css/style.css" />
 
     <script src="js/wysiwyg_helpers.js"></script>
     <script src="js/wysiwyg_callbacks.js"></script>
@@ -18,6 +19,8 @@
     <script src="plugins/citations/js/script.js"></script>
     <script src="plugins/posts/js/script.js"></script>
     <script src="plugins/nicolas/js/script.js"></script>
+    <script src="plugins/videos/js/script.js"></script>
+    <script src="plugins/videos/js/script.js"></script>
 </head>
 <body>
 <div style="display: inline-block;">
@@ -49,12 +52,14 @@ attributs pris en charge:
 -->
 <div class="post-list"></div>
 
-<wysiwyg id="wysiwyg" style="display: inline-block;"
+<wysiwyg id="wysiwyg" style="display: inline-block; height: 450px;"
          placeholder="Voila un magnifique placeholder"
          class="test"
          resizable
          spellcheck="false">
     voila du text de test
+    <div class="video" data-video='grass'></div><br>
+    <div class="video" data-video='parrots'></div><br>
 </wysiwyg>
 
 </body>

@@ -64,10 +64,10 @@
     margin-top: 40px;
     width: 20px;
     height: 20px;
-    left: 25px;
+    left: 27px;
     transform: rotate(45deg);
     background-color: white;
-    box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 0 0 rgba(0, 0, 0, 0.2);
     border-bottom: 1px solid rgba(0, 0, 0, 0.3);
     border-left: 1px solid rgba(0, 0, 0, 0.3);
 }
@@ -86,7 +86,7 @@
     margin-top: 40px;
     width: 20px;
     height: 20px;
-    right: 10px;
+    right: 12px;
     transform: rotate(45deg);
     background-color: white;
     box-shadow: 6px 0 0 0 rgba(0, 0, 0, 0.1);

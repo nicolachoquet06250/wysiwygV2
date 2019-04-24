@@ -123,3 +123,88 @@ function helper_debug(editor, wys, debug, framework = 'none') {
     }
     return editor;
 }
+
+// helper class CreateElement
+function CreateElement(element, exists = false) {
+    if(element.substr(0, 1) === '.' || element.substr(0, 1) === '#' ||(!(element.substr(0, 1) === '.' || element.substr(0, 1) === '#') && exists)) {
+        this.element = document.querySelector(element);
+        this.tag = this.element.tagName.toLowerCase();
+    }
+    else {
+        this.tag = element;
+        this.element = document.createElement(element);
+    }
+}
+
+CreateElement.prototype.getThis = function(callback) {
+    callback();
+    return this;
+};
+
+CreateElement.prototype.addClass = function (_class) {
+    return this.getThis(() => this.element.classList.add(_class));
+};
+
+CreateElement.prototype.addClasses = function (...classes) {
+    return this.getThis(() => {
+        classes.forEach(_class => {
+            this.addClass(_class);
+        });
+    });
+};
+
+CreateElement.prototype.setId = function (id) {
+    return this.getThis(() => this.element.setAttribute('id', id));
+};
+
+CreateElement.prototype.setValue = function (value) {
+    return this.getThis(() => {
+        if(this.tag === 'input' || this.tag === 'select') {
+            this.element.value = value;
+        }
+        else {
+            if(typeof value === "object") {
+                value instanceof Array
+                    ? value.forEach(val => this.element.append(val)) : this.element.append(value);
+            }
+            else if(typeof value === "string") {
+                this.element.innerHTML = value;
+            }
+        }
+    });
+};
+
+CreateElement.prototype.get = function() {
+    return this.element;
+};
+
+CreateElement.prototype.has = function(key) {
+   return this.element.hasAttribute(key);
+};
+
+CreateElement.prototype.attr = function(key, value = null) {
+    if(value) {
+        this.element.setAttribute(key, value);
+        return this;
+    }
+    return this.has(key) ? this.element.getAttribute(key) : null;
+};
+
+CreateElement.prototype.data = function(key, value = null) {
+    if(value) {
+        this.element.setAttribute(`data-${key}`, value);
+        return this;
+    }
+    return this.attr(`data-${key}`);
+};
+
+
+let elem = new CreateElement('div')
+    .addClass('toto')
+    .addClass('test')
+    .addClass('lol')
+    .addClasses('test', 'test2', 'test3')
+    .data('toto_test', 'lol')
+    .attr('wp-admin', 'http')
+    .setId('monID').get();
+console.log(elem);
